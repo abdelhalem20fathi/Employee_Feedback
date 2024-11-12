@@ -1,0 +1,25 @@
+<odoo>
+
+    <record id="rule_employee_see_own_feedback" model="ir.rule">
+        <field name="name">Employee can see own feedback</field>
+        <field name="model_id" ref="model_employee_feedback"/>
+        <field name="domain_force">[('employee_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+
+    <record id="rule_employee_edit_own_pending_feedback" model="ir.rule">
+        <field name="name">Employee can edit own pending feedback</field>
+        <field name="model_id" ref="model_employee_feedback"/>
+        <field name="domain_force">[('employee_id.user_id', '=', user.id), ('status', '!=', 'pending')] </field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+</odoo>
